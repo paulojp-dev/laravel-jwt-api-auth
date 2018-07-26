@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
 use App\Job;
 use Illuminate\Http\Request;
 use function response;
@@ -65,6 +64,6 @@ class JobsController extends Controller {
 		
 		$job->delete();
 		
-		return response('', 20);
+		return response('', 204);
 	}
 }

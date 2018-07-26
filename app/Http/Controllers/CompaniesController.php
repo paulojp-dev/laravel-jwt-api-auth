@@ -67,6 +67,6 @@ class CompaniesController extends Controller {
 		
 		$company->delete();
 		
-		return response('', 20);
+		return response('', 204);
 	}
 }
