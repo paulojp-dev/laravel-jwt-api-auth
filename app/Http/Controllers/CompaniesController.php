@@ -21,17 +21,52 @@ class CompaniesController extends Controller {
 	}
 	
 	public function store(Request $request) {
+		$company = new Company();
+		$company->fill($request->all());
+		$company->save();
+		
+		return response()->json($company, 201);
 	}
 	
-	public function show(Company $company) {
+	public function show($id) {
+		$company = Company::find($id);
+		
+		if (!$company)
+			return response()->json([
+				'Record not found'
+			], 404);
+		
+		return $company;
 	}
 	
 	public function edit(Company $company) {
 	}
 	
-	public function update(Request $request, Company $company) {
+	public function update(Request $request, $id) {
+		$company = Company::find($id);
+		
+		if (!$company) {
+			return response()->json([
+				'message' => 'Record not found',
+			], 404);
+		}
+		
+		$company->fill($request->all());
+		$company->save();
+		
+		return response()->json($company);
 	}
 	
-	public function destroy(Company $company) {
+	public function destroy($id) {
+		$company = Company::find($id);
+		
+		if (!$company)
+			return response()->json([
+				'message' => 'Record not found'
+			], 404);
+		
+		$company->delete();
+		
+		return response('', 20);
 	}
 }
